@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: joindevops/app1:v1
+        image: ramana11k/app1:v1
         imagePullPolicy: Always
         resources:
           requests:
@@ -51,7 +51,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws76s.online"
+  - host: "app1.nikhildevops.online"
     http:
       paths:
       - pathType: Prefix
