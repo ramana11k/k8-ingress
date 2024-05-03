@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
+  name: app2
   labels: # these labels are deployment labels
-    app: app1
+    app: app2
 spec:
   replicas: 1
   selector:
     matchLabels: # these labels are used to find the pods
-      app: app1
+      app: app2
   template:
     metadata:
       labels: # these labels are pod labels
-        app: app1
+        app: app2
     spec:
       containers:
-      - name: app1
-        image: joindevops/app1:v1
+      - name: app2
+        image: joindevops/app2:v1
         imagePullPolicy: Always
         resources:
           requests:
@@ -29,10 +29,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1
+  name: app2
 spec:
   selector:
-    app: app1
+    app: app2
   ports:
   - protocol: TCP
     port: 80 #service-port
@@ -42,7 +42,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1
+  name: app2
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
@@ -51,13 +51,13 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws76s.online"
+  - host: "app2.daws76s.online"
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: app1
+            name: app2
             port:
               number: 80
